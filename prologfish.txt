@@ -4,40 +4,41 @@
 
 fish_owner(Owner) :-
 	houses(Hs),
-	fact(h(Owner,fish,_,_,_), Hs).
+	member(h(Owner,_,fish,_,_), Hs).
 
 %Each house instance is in the form of:
 %	h(nationality, color, pet, cigarette, drink)
+
 houses(Hs) :-
     %5 houses
     length(Hs, 5),
     
 	%1.	The Englishman lives in the red house.
-	fact(h(english,red,_,_,_), Hs),
+	member(h(english,red,_,_,_), Hs),
     
 	%2.	The Swede owns a dog.
-    	fact(h(swede,_,dog,_,_), Hs),
+    	member(h(swede,_,dog,_,_), Hs),
     
 	%3.	The Dane loves to drink tea.
-	fact(h(dane,_,_,_,tea), Hs),
+	member(h(dane,_,_,_,tea), Hs),
     
 	%4.	The green house is on the left of the white house.
 	next(h(_,green,_,_,_), h(_,white,_,_,_), Hs),       
    
 	%5.	The green house’s owner drinks coffee.
-	fact(h(_,green,_,_,coffee), Hs),
+	member(h(_,green,_,_,coffee), Hs),
     
 	%6.	The person who smokes Pall Mall owns a bird.
-    	fact(h(_,_,bird,pallmall,_), Hs),
+    	member(h(_,_,bird,pallmall,_), Hs),
 
 	%7.	The person who lives in the middle house drinks milk.
-	next(h(_,_,_,_,_), h(_,_,_,_,_), h(_,_,_,_,milk), h(_,_,_,_,_), h(_,_,_,_,_), Hs),       
+	Hs = [_,_,h(_,_,_,_,milk),_,_],                          
     
 	%8.	The Norwegian lives in the first house.
-	next(h(norwegian,_,_,_,_), h(_,_,_,_,_), h(_,_,_,_,_), h(_,_,_,_,_), h(_,_,_,_,_), Hs),       
+	Hs = [h(norwegian,_,_,_,_),_,_,_,_],                          
 
     	%9.	The person who lives in the yellow house smokes Dunhill.
-    	fact(h(_,yellow,_,dunhill_), Hs),
+    	member(h(_,yellow,_,dunhill_), Hs),
     
 	%10. The Marlboro smoker lives beside the person who owns a cat.
 	next(h(_,_,_,marlboro,_), h(_,_,cat,_,_), Hs),       
@@ -46,19 +47,22 @@ houses(Hs) :-
 	next(h(_,_,horse,_,_), h(_,_,_,dunhill,_), Hs),       
     
 	%12. The Winfield smoker drinks beer.
-	fact(h(_,_,_,winfield,beer), Hs),
+	member(h(_,_,_,winfield,beer), Hs),
     
 	%13. The Norwegian lives beside the blue house
 	next(h(norwegian,_,_,_,_), h(_,blue,_,_,_), Hs),       
     
 	%14. The German smokes Rothmanns.
-	fact(h(german,_,_,_,rothmanns), Hs),
+	member(h(german,_,_,_,rothmanns), Hs),
     
 	%15. The Marlboro smoker has a neighbor who drinks water.
 	next(h(_,_,_,marlboro,_), h(_,_,_,_,water), Hs),       
     
-    	% Someone owns a fish as a pet
-    	fact(h(_,_,fish,_,_), Hs),
+   	 % Someone owns a fish as a pet
+    	member(h(_,_,fish,_,_), Hs).
 
 	next(A, B, Ls) :- append(_, [A,B|_], Ls).
 	next(A, B, Ls) :- append(_, [B,A|_], Ls).
+    
+    
+    
