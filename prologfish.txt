@@ -1,5 +1,7 @@
 % Ryan Newsom & Nick Beier
 % Principles of Programming Languages
+% Ryan Newsom & Nick Beier
+% Principles of Programming Languages
 % Who owns the fish?
 
 fish_owner(Owner) :-                                                               
@@ -96,4 +98,4 @@ next(A, B, Ls) :- append(_, [B,A|_], Ls).
 % smokes_winfield(Smoker) -> Smoker = swede
 % houses(Hs). -> Hs = [h(norwegian, yellow, cat, dunhill, water), h(dane, blue, horse, marlboro, tea), 
 % 	h(english, red, bird, pallmall, milk), h(swede, white, dog, winfield, beer), 
-% 	h(german, green, fish, rothmanns, coffee)]																																		         %15. The Marlboro smoker has a neighbor who drinks water.                        																																				     member(h(german,_,_,rothmanns,_), Hs),                                          																																			         %14. The German smokes Rothmanns.                                                																																			     next(h(norwegian,_,_,_,_), h(_,blue,_,_,_), Hs),                                																																		         %13. The Norwegian lives beside the blue house                                   																																		     member(h(_,_,_,winfield,beer), Hs),                                             																																	         %12. The Winfield smoker drinks beer.                                            																																	     next(h(_,_,horse,_,_), h(_,_,_,dunhill,_), Hs),                                 
+% 	h(german, green, fish, rothmanns, coffee)]																																	         %15. The Marlboro smoker has a neighbor who drinks water.                        																																				     member(h(german,_,_,rothmanns,_), Hs),                                          																																			         %14. The German smokes Rothmanns.                                                																																			     next(h(norwegian,_,_,_,_), h(_,blue,_,_,_), Hs),                                																																		         %13. The Norwegian lives beside the blue house                                   																																		     member(h(_,_,_,winfield,beer), Hs),                                             																																	         %12. The Winfield smoker drinks beer.                                            																																	     next(h(_,_,horse,_,_), h(_,_,_,dunhill,_), Hs),                                 
