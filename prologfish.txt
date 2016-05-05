@@ -1,68 +1,99 @@
-% Ryan Newsom & Nick
+% Ryan Newsom & Nick Beier
 % Principles of Programming Languages
 % Who owns the fish?
 
-fish_owner(Owner) :-
-	houses(Hs),
-	member(h(Owner,_,fish,_,_), Hs).
+fish_owner(Owner) :-                                                               
+    houses(Hs),                                                                    
+    member(h(Owner,_,fish,_,_), Hs).      
 
-%Each house instance is in the form of:
-%	h(nationality, color, pet, cigarette, drink)
+smokes_winfield(Smoker) :- 
+    houses(Hs),
+    member(h(Smoker,_,_,winfield,_), Hs).
 
-houses(Hs) :-
-    %5 houses
-    length(Hs, 5),
-    
-	%1.	The Englishman lives in the red house.
-	member(h(english,red,_,_,_), Hs),
-    
-	%2.	The Swede owns a dog.
-    	member(h(swede,_,dog,_,_), Hs),
-    
-	%3.	The Dane loves to drink tea.
-	member(h(dane,_,_,_,tea), Hs),
-    
-	%4.	The green house is on the left of the white house.
-	next(h(_,green,_,_,_), h(_,white,_,_,_), Hs),       
-   
-	%5.	The green house’s owner drinks coffee.
-	member(h(_,green,_,_,coffee), Hs),
-    
-	%6.	The person who smokes Pall Mall owns a bird.
-    	member(h(_,_,bird,pallmall,_), Hs),
+drinks_milk(Drinker) :-
+    houses(Hs),
+    member(h(Drinker,_,_,_,milk), Hs).
 
-	%7.	The person who lives in the middle house drinks milk.
-	Hs = [_,_,h(_,_,_,_,milk),_,_],                          
-    
-	%8.	The Norwegian lives in the first house.
-	Hs = [h(norwegian,_,_,_,_),_,_,_,_],                          
+lives_in_white_house(Owner) :-
+    houses(Hs),
+    member(h(Owner,white,_,_,_), Hs).
 
-    	%9.	The person who lives in the yellow house smokes Dunhill.
-    	member(h(_,yellow,_,dunhill_), Hs),
-    
-	%10. The Marlboro smoker lives beside the person who owns a cat.
-	next(h(_,_,_,marlboro,_), h(_,_,cat,_,_), Hs),       
-    
-	%11. The man who owns a horse lives beside the person who smokes Dunhill.
-	next(h(_,_,horse,_,_), h(_,_,_,dunhill,_), Hs),       
-    
-	%12. The Winfield smoker drinks beer.
-	member(h(_,_,_,winfield,beer), Hs),
-    
-	%13. The Norwegian lives beside the blue house
-	next(h(norwegian,_,_,_,_), h(_,blue,_,_,_), Hs),       
-    
-	%14. The German smokes Rothmanns.
-	member(h(german,_,_,_,rothmanns), Hs),
-    
-	%15. The Marlboro smoker has a neighbor who drinks water.
-	next(h(_,_,_,marlboro,_), h(_,_,_,_,water), Hs),       
-    
-   	 % Someone owns a fish as a pet
-    	member(h(_,_,fish,_,_), Hs).
+drinks_jack_daniels(Alchoholic) :-
+    houses(Hs),
+    member(h(Alchoholic,_,_,_,jackDaniels), Hs).
 
-	next(A, B, Ls) :- append(_, [A,B|_], Ls).
-	next(A, B, Ls) :- append(_, [B,A|_], Ls).
-    
-    
-    
+
+
+                                                                                   
+%Each house instance is in the form of:                                            
+%   h(nationality, color, pet, cigarette, drink)                                   
+                                                  
+
+houses(Hs) :-                                                                      
+
+    %5 houses                                                                      
+    length(Hs, 5),                                                                 
+
+    %1. The Englishman lives in the red house.                                     
+    member(h(english,red,_,_,_), Hs),                                              
+
+    %2. The Swede owns a dog.                                                      
+    member(h(swede,_,dog,_,_), Hs),                                                
+
+    %3. The Dane loves to drink tea.                                               
+    member(h(dane,_,_,_,tea), Hs),                                                 
+
+    %4. The green house is on the left of the white house.                         
+    next(h(_,green,_,_,_), h(_,white,_,_,_), Hs),                                  
+
+    %5. The green house owner drinks coffee.                                  
+    member(h(_,green,_,_,coffee), Hs),                                             
+
+    %6. The person who smokes Pall Mall owns a bird.                               
+    member(h(_,_,bird,pallmall,_), Hs),
+
+    %7. The person who lives in the middle house drinks milk.
+    Hs = [_,_,h(_,_,_,_,milk),_,_],                                                
+
+    %8. The Norwegian lives in the first house.                                    
+    Hs = [h(norwegian,_,_,_,_),_,_,_,_],                                           
+
+    %9. The person who lives in the yellow house smokes Dunhill.                   
+    member(h(_,yellow,_,dunhill,_), Hs),                                            
+
+    %10. The Marlboro smoker lives beside the person who owns a cat.               
+    next(h(_,_,_,marlboro,_), h(_,_,cat,_,_), Hs),                                 
+
+    %11. The man who owns a horse lives beside the person who smokes Dunhill.   
+    next(h(_,_,horse,_,_), h(_,_,_,dunhill,_), Hs),                                
+
+    %12. The Winfield smoker drinks beer.                                          
+    member(h(_,_,_,winfield,beer), Hs),                                            
+
+    %13. The Norwegian lives beside the blue house                                 
+    next(h(norwegian,_,_,_,_), h(_,blue,_,_,_), Hs),                               
+
+    %14. The German smokes Rothmanns.                                              
+    member(h(german,_,_,rothmanns,_), Hs),                                         
+
+    %15. The Marlboro smoker has a neighbor who drinks water.                      
+    next(h(_,_,_,marlboro,_), h(_,_,_,_,water), Hs),                               
+
+    % Someone owns a fish as a pet                                                 
+    member(h(_,_,fish,_,_), Hs).                                                   
+
+% end of houses rule
+
+
+next(A, B, Ls) :- append(_, [A,B|_], Ls).                                          
+next(A, B, Ls) :- append(_, [B,A|_], Ls).
+
+%Sample Queries
+% drinks_jack_daniels(Alchoholic). -> false
+% lives_in_white_house(Owner) -> Owner = swede
+% drinks_milk(Drinker). -> Drinker = english
+% fish_owner(Owner). -> Owner = german
+% smokes_winfield(Smoker) -> Smoker = swede
+% houses(Hs). -> Hs = [h(norwegian, yellow, cat, dunhill, water), h(dane, blue, horse, marlboro, tea), 
+% 	h(english, red, bird, pallmall, milk), h(swede, white, dog, winfield, beer), 
+% 	h(german, green, fish, rothmanns, coffee)]																																		         %15. The Marlboro smoker has a neighbor who drinks water.                        																																				     member(h(german,_,_,rothmanns,_), Hs),                                          																																			         %14. The German smokes Rothmanns.                                                																																			     next(h(norwegian,_,_,_,_), h(_,blue,_,_,_), Hs),                                																																		         %13. The Norwegian lives beside the blue house                                   																																		     member(h(_,_,_,winfield,beer), Hs),                                             																																	         %12. The Winfield smoker drinks beer.                                            																																	     next(h(_,_,horse,_,_), h(_,_,_,dunhill,_), Hs),                                 
